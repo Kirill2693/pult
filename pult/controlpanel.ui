@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>ControlPanel</class>
  <widget class="QMainWindow" name="ControlPanel">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,6 +13,11 @@
     <height>627</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>ControlPanel</string>
   </property>
@@ -17,8 +25,8 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>10</x>
+      <y>10</y>
       <width>971</width>
       <height>561</height>
      </rect>
@@ -26,14 +34,14 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="ControlTab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>Панель управления</string>
      </attribute>
      <widget class="QGraphicsView" name="YawView">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>310</x>
         <y>70</y>
         <width>331</width>
         <height>321</height>
@@ -43,20 +51,26 @@
      <widget class="QProgressBar" name="RollBar">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>90</y>
+        <x>160</x>
+        <y>70</y>
         <width>61</width>
-        <height>281</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="minimum">
-       <number>-90</number>
+       <number>-60</number>
       </property>
       <property name="maximum">
-       <number>90</number>
+       <number>60</number>
       </property>
       <property name="value">
        <number>0</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+      </property>
+      <property name="textVisible">
+       <bool>true</bool>
       </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -68,16 +82,16 @@
        <enum>QProgressBar::BottomToTop</enum>
       </property>
       <property name="format">
-       <string>m</string>
+       <string/>
       </property>
      </widget>
      <widget class="QProgressBar" name="DepthBar">
       <property name="geometry">
        <rect>
-        <x>740</x>
-        <y>90</y>
+        <x>730</x>
+        <y>70</y>
         <width>71</width>
-        <height>281</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="value">
@@ -89,16 +103,277 @@
       <property name="invertedAppearance">
        <bool>true</bool>
       </property>
+      <property name="textDirection">
+       <enum>QProgressBar::TopToBottom</enum>
+      </property>
+      <property name="format">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QSlider" name="SetRollSlider">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>70</y>
+        <width>22</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>-60</number>
+      </property>
+      <property name="maximum">
+       <number>60</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="invertedAppearance">
+       <bool>false</bool>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::TicksBothSides</enum>
+      </property>
+      <property name="tickInterval">
+       <number>20</number>
+      </property>
+     </widget>
+     <widget class="QSlider" name="SetDepthSlider">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>70</y>
+        <width>22</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="invertedAppearance">
+       <bool>true</bool>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::TicksBothSides</enum>
+      </property>
+      <property name="tickInterval">
+       <number>20</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="DptTxtLabel">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>20</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Глубина</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SetDepthLabel">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>450</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SetYawlabel">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>450</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SetRolLabel">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>450</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CurDepthLabel">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>230</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="YawTxtLabel">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>20</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>КУРС</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="RollTxtLabel">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>20</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Крен</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>420</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Заданный курс</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>420</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Заданная глубина</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>420</y>
+        <width>121</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Заданный крен</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CurRolLabel">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>230</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Настройки</string>
      </attribute>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
-      <string>Tab3</string>
+      <string>Сиситема управления</string>
      </attribute>
     </widget>
    </widget>
@@ -109,7 +384,7 @@
      <x>0</x>
      <y>0</y>
      <width>993</width>
-     <height>26</height>
+     <height>29</height>
     </rect>
    </property>
   </widget>
