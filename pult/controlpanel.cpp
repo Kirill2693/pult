@@ -14,8 +14,11 @@ ControlPanel::ControlPanel(QWidget *parent) :
     ui->CurRolLabel->setText("0");
     ui->DepthBar->setValue(0);
     ui->RollBar->setValue(0);
-
+    ui->SetRollSlider->setValue(0);
+    ui->SetDepthSlider->setValue(0);
     RovMov = new RovOrient(this);
+
+    connect(RovMov, SIGNAL(UpdateSetWG(MoveParm&)),this, SLOT(UpdateWidgets(MoveParm&)));
 }
 
 ControlPanel::~ControlPanel()
@@ -47,11 +50,22 @@ void ControlPanel::keyPressEvent(QKeyEvent *e)
      case Qt::Key_Up:
         RovMov->SetDepthSpeed(REVERS_DIR);
         break;
-     case Qt::Key_Control:
+     case Qt::Key_Q:
         RovMov->SetRollSpeed(FORWARD_DIR);
         break;
-     case Qt::Key_Alt:
+     case Qt::Key_E:
         RovMov->SetRollSpeed(REVERS_DIR);
         break;
     }
+}
+
+void ControlPanel::UpdateWidgets(MoveParm &Move)
+{
+    qDebug()<<"Slot UpdateWigets "<<Move.Roll;
+    ui->SetRollSlider->setValue(static_cast<int>(Move.Roll));
+    ui->SetDepthSlider->setValue(static_cast<int>(Move.Depth));
+    ui->SetRolLabel->setText(QString::number(Move.Roll,'f',0));
+    ui->SetDepthLabel->setText(QString::number(Move.Depth,'f',0));
+    ui->SetYawlabel->setText(QString::number(Move.Yaw,'f',0));
+
 }

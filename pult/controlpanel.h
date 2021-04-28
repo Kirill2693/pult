@@ -21,6 +21,8 @@ public:
     explicit ControlPanel(QWidget *parent = 0);
     ~ControlPanel();
 
+public slots:
+    void UpdateWidgets(MoveParm &Move);
 protected:
     void virtual keyPressEvent(QKeyEvent * e);
 

@@ -34,6 +34,7 @@ public:
 
     void UpdateSetMove();
 signals:
+    void UpdateSetWG(MoveParm &Move);
 
 public slots:
 

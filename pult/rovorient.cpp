@@ -123,6 +123,9 @@ void RovOrient::UpdateSetMove()
     SetMove.DepthSpeed = 0;
     SetMove.MarchSpeed = 0;
 
+    emit UpdateSetWG(SetMove);
+    qDebug()<<"Emit UpdateSetWG"<<SetMove.Yaw;
+
     qDebug()<<"Set Yaw: "<<SetMove.Yaw;
     qDebug()<<"Set Roll: "<<SetMove.Roll;
     qDebug()<<"Set Depth: "<<SetMove.Depth;
