@@ -22,7 +22,7 @@ public:
     ~ControlPanel();
 
 public slots:
-    void UpdateWidgets(MoveParm &Move);
+    void UpdateWidgets(const MoveParm &Move);
 protected:
     void virtual keyPressEvent(QKeyEvent * e);
 

@@ -31,10 +31,8 @@ public:
     void SetYawSpeed(int dir);
     void SetDepthSpeed(int dir);
     void SetMarchSpeed(int dir);
-
-    void UpdateSetMove();
 signals:
-    void UpdateSetWG(MoveParm &Move);
+    void UpdateSetWG(const MoveParm &Move);
 
 public slots:
 
