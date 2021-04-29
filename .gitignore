@@ -13,3 +13,14 @@ build-pult-Desktop_Qt_5_11_1_MinGW_32bit-Debug/Makefile
 build-pult-Desktop_Qt_5_11_1_MinGW_32bit-Debug/Makefile.Debug
 build-pult-Desktop_Qt_5_11_1_MinGW_32bit-Debug/Makefile.Release
 build-pult-Desktop_Qt_5_11_1_MinGW_32bit-Debug/ui_controlpanel.h
+*.stash
+*.o
+build-pult/debug/moc_controlpanel.cpp
+build-pult/debug/moc_predefs.h
+build-pult/debug/moc_rovorient.cpp
+build-pult/debug/pult.exe
+build-pult/Makefile
+build-pult/Makefile.Debug
+build-pult/Makefile.Debug
+build-pult/Makefile.Release
+build-pult/ui_controlpanel.h
