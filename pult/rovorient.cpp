@@ -96,3 +96,44 @@ void RovOrient::SetMarchSpeed(int dir)
     }
     emit UpdateSetWG(SetMove);
 }
+
+void RovOrient::KeyGrab(QKeyEvent *ev)
+{
+    switch (ev->key())
+    {
+    case Qt::Key_D:
+        SetYawSpeed(FORWARD_DIR);
+        qDebug()<<"keyD";
+        break;
+    case Qt::Key_A:
+        SetYawSpeed(REVERS_DIR);
+         qDebug()<<"keyA";
+        break;
+     case Qt::Key_W:
+        SetMarchSpeed(FORWARD_DIR);
+        break;
+     case Qt::Key_S:
+        SetMarchSpeed(REVERS_DIR);
+        break;
+     case Qt::Key_Down:
+        SetDepthSpeed(FORWARD_DIR);
+        break;
+     case Qt::Key_Up:
+        SetDepthSpeed(REVERS_DIR);
+        break;
+     case Qt::Key_Q:
+        SetRollSpeed(FORWARD_DIR);
+        break;
+     case Qt::Key_E:
+        SetRollSpeed(REVERS_DIR);
+        break;
+    }
+}
+
+void RovOrient::ResetSpeed()
+{
+    SetMove.DepthSpeed = 0;
+    SetMove.MarchSpeed = 0;
+    SetMove.RollSpeed = 0;
+    SetMove.YawSpeed = 0;
+}

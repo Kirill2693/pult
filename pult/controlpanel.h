@@ -8,6 +8,8 @@
 #include <QGraphicsTextItem>
 #include <QKeyEvent>
 #include "rovorient.h"
+#include "rovcontrol.h"
+#include "datatypes.h"
 
 namespace Ui {
 class ControlPanel;
@@ -23,6 +25,10 @@ public:
 
 public slots:
     void UpdateWidgets(const MoveParm &Move);
+    void UpdateRovWidgets(const MoveParm &Move);
+
+signals:
+    void KeyPressure(QKeyEvent *ev);
 protected:
     void virtual keyPressEvent(QKeyEvent * e);
 
@@ -34,6 +40,7 @@ private:
     QGraphicsPixmapItem *picDial;
     QGraphicsTextItem *txtCurrentYaw;
     RovOrient *RovMov;
+    RovControl *RovSU;
 };
 
 #endif // CONTROLPANEL_H

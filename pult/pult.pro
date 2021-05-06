@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,11 +27,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         controlpanel.cpp \
-    rovorient.cpp
+    rovorient.cpp \
+    rovcontrol.cpp \
+    communication.cpp
 
 HEADERS += \
         controlpanel.h \
-    rovorient.h
+    rovorient.h \
+    rovcontrol.h \
+    communication.h \
+    datatypes.h
 
 FORMS += \
         controlpanel.ui

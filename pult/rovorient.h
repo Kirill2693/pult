@@ -2,18 +2,8 @@
 #define ROVORIENT_H
 
 #include <QObject>
-
-struct MoveParm
-{
-    MoveParm() {}
-    double Yaw;
-    double YawSpeed;
-    double Roll;
-    double RollSpeed;
-    double Depth;
-    double DepthSpeed;
-    double MarchSpeed;
-};
+#include <QKeyEvent>
+#include "datatypes.h"
 
 enum Direct
 {
@@ -31,10 +21,21 @@ public:
     void SetYawSpeed(int dir);
     void SetDepthSpeed(int dir);
     void SetMarchSpeed(int dir);
+    void ResetSpeed();
+    MoveParm GetSetMove()
+    {
+        return SetMove;
+    }
+    MoveParm GetRovMove()
+    {
+        return RovMove;
+    }
+
 signals:
     void UpdateSetWG(const MoveParm &Move);
 
 public slots:
+    void KeyGrab(QKeyEvent *ev);
 
 private:
 

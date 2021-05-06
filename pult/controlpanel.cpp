@@ -16,7 +16,9 @@ ControlPanel::ControlPanel(QWidget *parent) :
     ui->RollBar->setValue(0);
     ui->SetRollSlider->setValue(0);
     ui->SetDepthSlider->setValue(0);
+
     RovMov = new RovOrient(this);
+    RovSU = new RovControl(this);
 
     scene = new QGraphicsScene (ui->YawView);
     ui->YawView->setScene(scene);
@@ -35,6 +37,9 @@ ControlPanel::ControlPanel(QWidget *parent) :
     picROV->setRotation(0);
 
     connect(RovMov, SIGNAL(UpdateSetWG(const MoveParm&)),this, SLOT(UpdateWidgets(const MoveParm&)));
+    connect(this,SIGNAL(KeyPressure(QKeyEvent*)),RovMov,SLOT(KeyGrab(QKeyEvent*)));
+    connect(this, SIGNAL(KeyPressure(QKeyEvent*)), RovSU,SLOT(key(QKeyEvent *)));
+    connect(RovSU,SIGNAL(UpdateRoveWidgents(const MoveParm&)),this,SLOT(UpdateRovWidgets(const MoveParm&)));
 }
 
 ControlPanel::~ControlPanel()
@@ -44,35 +49,7 @@ ControlPanel::~ControlPanel()
 
 void ControlPanel::keyPressEvent(QKeyEvent *e)
 {
-    switch (e->key())
-    {
-    case Qt::Key_D:
-        RovMov->SetYawSpeed(FORWARD_DIR);
-        qDebug()<<"keyD";
-        break;
-    case Qt::Key_A:
-        RovMov->SetYawSpeed(REVERS_DIR);
-         qDebug()<<"keyA";
-        break;
-     case Qt::Key_W:
-        RovMov->SetMarchSpeed(FORWARD_DIR);
-        break;
-     case Qt::Key_S:
-        RovMov->SetMarchSpeed(REVERS_DIR);
-        break;
-     case Qt::Key_Down:
-        RovMov->SetDepthSpeed(FORWARD_DIR);
-        break;
-     case Qt::Key_Up:
-        RovMov->SetDepthSpeed(REVERS_DIR);
-        break;
-     case Qt::Key_Q:
-        RovMov->SetRollSpeed(FORWARD_DIR);
-        break;
-     case Qt::Key_E:
-        RovMov->SetRollSpeed(REVERS_DIR);
-        break;
-    }
+    emit KeyPressure(e);
 }
 
 void ControlPanel::UpdateWidgets(const MoveParm &Move)
@@ -81,14 +58,24 @@ void ControlPanel::UpdateWidgets(const MoveParm &Move)
     ui->SetRollSlider->setValue(static_cast<int>(Move.Roll));
     ui->SetDepthSlider->setValue(static_cast<int>(Move.Depth));
     ui->SetRolLabel->setText(QString::number(Move.Roll,'f',0));
-    ui->SetDepthLabel->setText(QString::number(Move.Depth,'f',0));
+    ui->SetDepthLabel->setText(QString::number(Move.Depth,'f',1));
     ui->SetYawlabel->setText(QString::number(Move.Yaw,'f',0));
 
-    txtCurrentYaw->setPlainText(QString::number(Move.Yaw));
-    picROV->setRotation(Move.Yaw);
 
-    qDebug()<<"Set Yaw: "<<Move.Yaw;
+    //picROV->setRotation(Move.Yaw);
+
+   /* qDebug()<<"Set Yaw: "<<Move.Yaw;
     qDebug()<<"Set Roll: "<<Move.Roll;
     qDebug()<<"Set Depth: "<<Move.Depth;
-    qDebug()<<"Set March Seed: "<<Move.MarchSpeed;
+    qDebug()<<"Set March Seed: "<<Move.MarchSpeed; */
+}
+
+void ControlPanel::UpdateRovWidgets(const MoveParm &Move)
+{
+    picROV->setRotation(Move.Roll);
+    txtCurrentYaw->setPlainText(QString::number(Move.Yaw,'f',1));
+    ui->RollBar->setValue(static_cast<int>(Move.Roll));
+    ui->DepthBar->setValue(static_cast<int>(Move.Depth));
+    ui->CurRolLabel->setText(QString::number(Move.Roll,'f',0));
+    ui->CurDepthLabel->setText(QString::number(Move.Depth,'f',1));
 }
