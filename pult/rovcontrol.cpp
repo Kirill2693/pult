@@ -5,9 +5,8 @@
 RovControl::RovControl(QObject *parent) : QObject(parent)
 {
     timer = new QTimer();
-    timer->start(100);
+    timer->start(5000);
     udp = new Communication();
-    RovMov = new RovOrient();
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
 }
 
@@ -19,7 +18,7 @@ void RovControl::tick()
     DirectControl();
     BfsDrk();
     udp->send(DrkSignals);
-    //RovMov->ResetSpeed();
+    ResetSetSpeed();
 }
 
 void RovControl::BfsDrk()
@@ -32,16 +31,28 @@ void RovControl::BfsDrk()
     DrkSignals.Uhlb = static_cast<int>(SpeedError.March-SpeedError.Yaw);
 }
 
+void RovControl::BfsDrk(const ContourSignals &OutContour)
+{
+    DrkSignals.Uvr = static_cast<int>(OutContour.Depth+OutContour.Roll);
+    DrkSignals.Uvl = static_cast<int>(OutContour.Depth-OutContour.Roll);
+    DrkSignals.Uhrf = static_cast<int>(OutContour.March+OutContour.Yaw);
+    DrkSignals.Uhrb = static_cast<int>(OutContour.March+OutContour.Yaw);
+    DrkSignals.Uhlf = static_cast<int>(OutContour.March-OutContour.Yaw);
+    DrkSignals.Uhlb = static_cast<int>(OutContour.March-OutContour.Yaw);
+}
+
 void RovControl::DirectControl()
 {
-   SpeedError.Depth = RovMov->GetSetMove().DepthSpeed;
-   SpeedError.Yaw = RovMov->GetSetMove().YawSpeed;
-   SpeedError.March = RovMov->GetSetMove().MarchSpeed;
-   SpeedError.Roll = RovMov->GetSetMove().RollSpeed;
+   SpeedError.Depth = SetRovOrient.DepthSpeed;
+   SpeedError.Yaw = SetRovOrient.YawSpeed;
+   SpeedError.March = SetRovOrient.MarchSpeed;
+   SpeedError.Roll = SetRovOrient.RollSpeed;
 
 }
 
-void RovControl::key(QKeyEvent *ev)
+void RovControl::ResetSetSpeed()
 {
-    RovMov->KeyGrab(ev);
+    SetRovOrient.YawSpeed=0;
+    SetRovOrient.MarchSpeed =0;
+    SetRovOrient.RollSpeed = 0;
 }

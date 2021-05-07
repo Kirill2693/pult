@@ -26,9 +26,9 @@ public:
     {
         return SetMove;
     }
-    MoveParm GetRovMove()
+    void SetSens(double sens)
     {
-        return RovMove;
+        senstive = sens;
     }
 
 signals:
@@ -40,7 +40,7 @@ public slots:
 private:
 
     MoveParm SetMove;
-    MoveParm RovMove;
+    double senstive;
 
 };
 

@@ -12,17 +12,19 @@ SetMove.RollSpeed = 0;
 SetMove.Yaw = 0;
 SetMove.YawSpeed = 0;
 
+senstive = 5;
+
 }
 
 void RovOrient::SetRollSpeed(int dir)
 {
     if(dir == FORWARD_DIR)
     {
-        SetMove.RollSpeed = 10;
+        SetMove.RollSpeed = senstive;
     }
     else if(dir == REVERS_DIR)
     {
-         SetMove.RollSpeed = -10;
+         SetMove.RollSpeed = -senstive;
     }
 
     SetMove.Roll += SetMove.RollSpeed;
@@ -41,11 +43,11 @@ void RovOrient::SetYawSpeed(int dir)
 {
     if(dir == FORWARD_DIR)
     {
-        SetMove.YawSpeed = 10;
+        SetMove.YawSpeed = senstive;
     }
     else if(dir == REVERS_DIR)
     {
-         SetMove.YawSpeed = -10;
+         SetMove.YawSpeed = -senstive;
     }
 
     SetMove.Yaw += SetMove.YawSpeed;
@@ -65,11 +67,11 @@ void RovOrient::SetDepthSpeed(int dir)
 {
     if(dir == FORWARD_DIR)
     {
-        SetMove.DepthSpeed = 10;
+        SetMove.DepthSpeed = senstive;
     }
     else if(dir == REVERS_DIR)
     {
-         SetMove.DepthSpeed = -10;
+         SetMove.DepthSpeed = -senstive;
     }
 
     SetMove.Depth += SetMove.DepthSpeed;
@@ -88,11 +90,11 @@ void RovOrient::SetMarchSpeed(int dir)
 {
     if(dir == FORWARD_DIR)
     {
-        SetMove.MarchSpeed = 10;
+        SetMove.MarchSpeed = senstive;
     }
     else if(dir == REVERS_DIR)
     {
-         SetMove.MarchSpeed = -10;
+         SetMove.MarchSpeed = -senstive;
     }
     emit UpdateSetWG(SetMove);
 }

@@ -35,3 +35,33 @@ void Communication::resivData()
         qDebug()<<"Resive YawSpeed"<<ResiveData.YawSpeed;
     }
 }
+
+void Communication::ProcessingRawData()
+{
+    if(ResiveData.Yaw > 360)
+    {
+        ResiveData.Yaw = ResiveData.Yaw-360;
+    }
+    if(ResiveData.Yaw < 0)
+    {
+        ResiveData.Yaw =ResiveData.Yaw+360 ;
+    }
+
+    if(ResiveData.Depth<0)
+    {
+        ResiveData.Depth = 0;
+    }
+    if(ResiveData.Depth>100)
+    {
+        ResiveData.Depth = 100;
+    }
+
+    if(ResiveData.Roll > 60)
+    {
+        ResiveData.Roll = 60;
+    }
+    if(ResiveData.Roll < -60)
+    {
+        ResiveData.Roll = -60;
+    }
+}

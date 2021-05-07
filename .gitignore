@@ -24,3 +24,5 @@ build-pult/Makefile.Debug
 build-pult/Makefile.Debug
 build-pult/Makefile.Release
 build-pult/ui_controlpanel.h
+build-pult/debug/moc_communication.cpp
+build-pult/debug/moc_rovcontrol.cpp

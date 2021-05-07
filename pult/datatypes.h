@@ -22,7 +22,7 @@ struct ContourSignals
 
 struct MoveParm
 {
-    MoveParm() {}
+    MoveParm() {Yaw =0; YawSpeed = 0; Roll = 0; RollSpeed = 0; Depth = 0; DepthSpeed = 0; MarchSpeed = 0;}
     double Yaw;
     double YawSpeed;
     double Roll;

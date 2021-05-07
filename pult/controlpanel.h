@@ -24,7 +24,7 @@ public:
     ~ControlPanel();
 
 public slots:
-    void UpdateWidgets(const MoveParm &Move);
+    void UpdateSetWidgets(const MoveParm &Move);
     void UpdateRovWidgets(const MoveParm &Move);
 
 signals:

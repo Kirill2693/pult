@@ -36,7 +36,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     picROV->setTransformOriginPoint(picDial->pixmap().width()/2,picROV->pixmap().height()/2);
     picROV->setRotation(0);
 
-    connect(RovMov, SIGNAL(UpdateSetWG(const MoveParm&)),this, SLOT(UpdateWidgets(const MoveParm&)));
+    connect(RovMov, SIGNAL(UpdateSetWG(const MoveParm&)),this, SLOT(UpdateSetWidgets(const MoveParm&)));
     connect(this,SIGNAL(KeyPressure(QKeyEvent*)),RovMov,SLOT(KeyGrab(QKeyEvent*)));
     connect(this, SIGNAL(KeyPressure(QKeyEvent*)), RovSU,SLOT(key(QKeyEvent *)));
     connect(RovSU,SIGNAL(UpdateRoveWidgents(const MoveParm&)),this,SLOT(UpdateRovWidgets(const MoveParm&)));
@@ -52,22 +52,14 @@ void ControlPanel::keyPressEvent(QKeyEvent *e)
     emit KeyPressure(e);
 }
 
-void ControlPanel::UpdateWidgets(const MoveParm &Move)
+void ControlPanel::UpdateSetWidgets(const MoveParm &Move)
 {
-    qDebug()<<"Slot UpdateWigets "<<Move.Roll;
     ui->SetRollSlider->setValue(static_cast<int>(Move.Roll));
     ui->SetDepthSlider->setValue(static_cast<int>(Move.Depth));
     ui->SetRolLabel->setText(QString::number(Move.Roll,'f',0));
     ui->SetDepthLabel->setText(QString::number(Move.Depth,'f',1));
     ui->SetYawlabel->setText(QString::number(Move.Yaw,'f',0));
-
-
-    //picROV->setRotation(Move.Yaw);
-
-   /* qDebug()<<"Set Yaw: "<<Move.Yaw;
-    qDebug()<<"Set Roll: "<<Move.Roll;
-    qDebug()<<"Set Depth: "<<Move.Depth;
-    qDebug()<<"Set March Seed: "<<Move.MarchSpeed; */
+    RovSU->SetYaw(Move);
 }
 
 void ControlPanel::UpdateRovWidgets(const MoveParm &Move)

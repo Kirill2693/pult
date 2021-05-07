@@ -16,8 +16,10 @@ signals:
 public slots:
     void send(DRK sendData);
     void resivData();
+    void ProcessingRawData();
     MoveParm GetDataFromMatlab()
     {
+        ProcessingRawData();
         return ResiveData;
     }
 
@@ -25,7 +27,6 @@ private:
 
     QUdpSocket *m_socket;
     QUdpSocket *m_resiveSocket;
-
     MoveParm ResiveData;
 };
 

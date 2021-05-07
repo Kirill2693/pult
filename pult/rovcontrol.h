@@ -16,21 +16,27 @@ public:
     explicit RovControl(QObject *parent = nullptr);
     void BfsDrk();
     void DirectControl();
+    void BfsDrk(const ContourSignals &OutContour);
+    void SetYaw(const MoveParm& Move)
+    {
+        SetRovOrient = Move;
+    }
+    void ResetSetSpeed();
+
 signals:
     void UpdateRoveWidgents(const MoveParm& Rov);
 
 public slots:
     void tick();
-    void key(QKeyEvent *ev);
 
 private:
     QTimer *timer;
     Communication *udp;
-    RovOrient *RovMov;
     DRK DrkSignals;
     ContourSignals SpeedError;
     ContourSignals PosError;
     MoveParm MoveRov;
+    MoveParm SetRovOrient;
 };
 
 #endif // ROVCONTROL_H
