@@ -13,6 +13,13 @@ Communication::Communication(QObject *parent) : QObject(parent)
     qDebug()<<m_resiveSocket->errorString();
 
     connect(m_resiveSocket,SIGNAL(readyRead()),this,SLOT(resivData()));
+
+    //Тест
+    ResiveData.Depth = 10;
+    ResiveData.DepthSpeed = 2;
+    ResiveData.MarchSpeed = 1;
+    ResiveData.RollSpeed = 0.9;
+    ResiveData.YawSpeed = 6;
 }
 
 void Communication::send(DRK sendData)
@@ -31,38 +38,8 @@ void Communication::resivData()
     while(m_resiveSocket->hasPendingDatagrams())
     {
         m_resiveSocket->readDatagram((char*)&ResiveData,sizeof(ResiveData));
-        qDebug()<<"Resive Yaw"<<ResiveData.Yaw;
         qDebug()<<"Resive YawSpeed"<<ResiveData.YawSpeed;
     }
 }
 
-/*void Communication::ProcessingRawData()
-{
-    if(ResiveData.Yaw > 360)
-    {
-        ResiveData.Yaw = ResiveData.Yaw-360;
-    }
-    if(ResiveData.Yaw < 0)
-    {
-        ResiveData.Yaw =ResiveData.Yaw+360 ;
-    }
 
-    if(ResiveData.Depth<0)
-    {
-        ResiveData.Depth = 0;
-    }
-    if(ResiveData.Depth>100)
-    {
-        ResiveData.Depth = 100;
-    }
-
-    if(ResiveData.Roll > 60)
-    {
-        ResiveData.Roll = 60;
-    }
-    if(ResiveData.Roll < -60)
-    {
-        ResiveData.Roll = -60;
-    }
-}
-*/

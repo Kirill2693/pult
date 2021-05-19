@@ -14,7 +14,7 @@ RovControl::RovControl(QObject *parent) : QObject(parent)
     SetRovSpeed = {0,0,0,0};
     SetRovPos = {0,0,0,0};
 
-    WorkMode = {DirectMode,DirectMode,DirectMode,DirectMode};
+    WorkMode = {StabMode,DirectMode,DirectMode,DirectMode};
     timer = new QTimer();
     timer->start(Ts);
     udp = new Communication();
@@ -24,33 +24,20 @@ RovControl::RovControl(QObject *parent) : QObject(parent)
 void RovControl::tick()
 {
     //qDebug()<<"Timer tick";
-    MoveRov = udp->GetDataFromMatlab();
-    emit UpdateRoveWidgents(MoveRov);
-    DirectControl();
-    BfsDrk();
+    ConvertMatlabToVector(udp->GetDataFromMatlab()); // Получаем данные из матлаба и преобразуем их в вектор
+    IntegrRovSpeed();  // Интегрируем полученые скорости
+    emit UpdateRoveWidgents(CurentRovPos);  //Обновляем значения виджетов
+    QVector<double> OutSignals(4,0); // вектор выходных сигналов контуров
+
+    OutSignals[Yaw] = CalcContour(Yaw);  // расчет сигнала каждого контура
+    OutSignals[Roll] = CalcContour(Roll);
+    OutSignals[Depth] = CalcContour(Depth);
+    OutSignals[March] = CalcContour(March);
+
+    BfsDrk(OutSignals); // вычисляем стгналы на каждый двигатель
     udp->send(DrkSignals);
-    ResetSetSpeed();
+    ResetSetSpeed(); // сбрасываем значение скоростей
 }
-
-void RovControl::BfsDrk()
-{
-    DrkSignals.Uvr = static_cast<int>(SpeedError.Depth+SpeedError.Roll);
-    DrkSignals.Uvl = static_cast<int>(SpeedError.Depth-SpeedError.Roll);
-    DrkSignals.Uhrf = static_cast<int>(SpeedError.March+SpeedError.Yaw);
-    DrkSignals.Uhrb = static_cast<int>(SpeedError.March+SpeedError.Yaw);
-    DrkSignals.Uhlf = static_cast<int>(SpeedError.March-SpeedError.Yaw);
-    DrkSignals.Uhlb = static_cast<int>(SpeedError.March-SpeedError.Yaw);
-}
-
-/*void RovControl::BfsDrk(const ContourSignals &OutContour)
-{
-    DrkSignals.Uvr = OutContour.Depth+OutContour.Roll;
-    DrkSignals.Uvl = OutContour.Depth-OutContour.Roll;
-    DrkSignals.Uhrf = OutContour.March+OutContour.Yaw;
-    DrkSignals.Uhrb = OutContour.March+OutContour.Yaw;
-    DrkSignals.Uhlf = OutContour.March-OutContour.Yaw;
-    DrkSignals.Uhlb = OutContour.March-OutContour.Yaw;
-}*/
 
 void RovControl::BfsDrk(const QVector<double> &OutContour)
 {
@@ -64,20 +51,12 @@ void RovControl::BfsDrk(const QVector<double> &OutContour)
 
 }
 
-void RovControl::DirectControl()
-{
-   SpeedError.Depth = SetRovOrient.DepthSpeed;
-   SpeedError.Yaw = SetRovOrient.YawSpeed;
-   SpeedError.March = SetRovOrient.MarchSpeed;
-   SpeedError.Roll = SetRovOrient.RollSpeed;
-
-}
-
 void RovControl::ResetSetSpeed()
 {
-    SetRovOrient.YawSpeed=0;
-    SetRovOrient.MarchSpeed =0;
-    SetRovOrient.RollSpeed = 0;
+    SetRovSpeed[Yaw] = 0;
+    SetRovSpeed[Roll] = 0;
+    SetRovSpeed[Depth] = 0;
+    SetRovSpeed[March] = 0;
 }
 
 double RovControl::CalcContour(const int Contour)
@@ -110,6 +89,18 @@ double RovControl::Saturation(const double In,const double Up, const double Down
         out = Up;
     }
     return out;
+}
+
+void RovControl::SetRovParm(const MoveParm &Move)
+{
+    SetRovPos[Yaw] = Move.Yaw;
+    SetRovPos[Roll] = Move.Roll;
+    SetRovPos[Depth] = Move.Depth;
+
+    SetRovSpeed[Yaw] = Move.YawSpeed;
+    SetRovSpeed[Roll] = Move.RollSpeed;
+    SetRovSpeed[Depth] = Move.DepthSpeed;
+    SetRovSpeed[March] = Move.MarchSpeed;
 }
 
 void RovControl::SetK1(const int Contour, double value)
@@ -176,4 +167,13 @@ void RovControl::IntegrRovSpeed()
     {
        CurentRovPos[Roll] = -60;
     }
+}
+
+void RovControl::ConvertMatlabToVector(const DataFromMatlab &Data)
+{
+    CurentRovPos[Depth] = Data.Depth;
+    CurentRovSpeed[Yaw] = Data.YawSpeed;
+    CurentRovSpeed[Depth] = Data.DepthSpeed;
+    CurentRovSpeed[Roll] = Data.RollSpeed;
+    CurentRovSpeed[March] = Data.MarchSpeed;
 }

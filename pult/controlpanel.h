@@ -25,7 +25,7 @@ public:
 
 public slots:
     void UpdateSetWidgets(const MoveParm &Move);
-    void UpdateRovWidgets(const MoveParm &Move);
+    void UpdateRovWidgets(const QVector<double> &Move);
 
 signals:
     void KeyPressure(QKeyEvent *ev);

@@ -32,4 +32,14 @@ struct MoveParm
     double MarchSpeed;
 };
 
+struct DataFromMatlab
+{
+    DataFromMatlab() {Depth = 0; DepthSpeed = 0; MarchSpeed = 0; YawSpeed = 0; RollSpeed = 0;}
+    double Depth;
+    double DepthSpeed;
+    double MarchSpeed;
+    double YawSpeed;
+    double RollSpeed;
+};
+
 #endif // DATATYPES_H

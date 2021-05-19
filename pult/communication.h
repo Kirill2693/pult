@@ -16,7 +16,7 @@ signals:
 public slots:
     void send(DRK sendData); // передача в модель структуры с сигналами двигателей
     void resivData();        // прием данных из матлаба
-    MoveParm GetDataFromMatlab() // доступ к принятым данным
+    DataFromMatlab GetDataFromMatlab() // доступ к принятым данным
     {
         return ResiveData;
     }
@@ -25,7 +25,7 @@ private:
 
     QUdpSocket *m_socket;
     QUdpSocket *m_resiveSocket;
-    MoveParm ResiveData;
+    DataFromMatlab ResiveData;
 };
 
 #endif // COMMUNICATION_H

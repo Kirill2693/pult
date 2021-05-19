@@ -21,15 +21,17 @@ public:
       StabMode,
       SettingsMode
     };
-    explicit RovControl(QObject *parent = nullptr);
-    void BfsDrk();
-    void DirectControl();
-    void BfsDrk(const QVector<double> &OutContour); // Вычисление сигналов на двигатели
-    void SetYaw(const MoveParm& Move)
+    enum Contour
     {
-        SetRovOrient = Move;
-    }
-    void ResetSetSpeed();
+        Yaw,
+        Roll,
+        Depth,
+        March
+    };
+    explicit RovControl(QObject *parent = nullptr);
+    void BfsDrk(const QVector<double> &OutContour); // Вычисление сигналов на двигатели
+    void SetRovParm(const MoveParm& Move);  //Заданные параметры ориентации
+    void ResetSetSpeed(); //Обнуление скорости
 
     double CalcContour(const int Contour); //расчитываем значение на выходе каждого контура
     double Saturation(const double In,const double Up, const double Down); // функция насыщения
@@ -43,23 +45,19 @@ public:
     QVector<double>& GetKosPos();
     QVector<double>& GetKsp();
 
+    void ConvertMatlabToVector(const DataFromMatlab& Data);
+
     void SetMode(const int Contour,const int Value);
     void IntegrRovSpeed();
 
 signals:
-    void UpdateRoveWidgents(const MoveParm& Rov);
+    void UpdateRoveWidgents(const QVector<double>& RovOrient);
 
 public slots:
     void tick();
 
 private:
-    enum Contour
-    {
-        Yaw,
-        Roll,
-        Depth,
-        March
-    };
+
 
     QTimer *timer;
     int Ts = 100; // период замыкания системы управления
@@ -80,10 +78,7 @@ private:
     double ThrusterUp = 400; //Ограничение входного сигнала движителей
     double ThrusterDown = -400;
 
-    ContourSignals SpeedError;
-    ContourSignals PosError;
-    MoveParm MoveRov;
-    MoveParm SetRovOrient;
+    DataFromMatlab RovData;
 
 };
 

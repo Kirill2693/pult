@@ -39,7 +39,7 @@ ControlPanel::ControlPanel(QWidget *parent) :
     connect(RovMov, SIGNAL(UpdateSetWG(const MoveParm&)),this, SLOT(UpdateSetWidgets(const MoveParm&)));
     connect(this,SIGNAL(KeyPressure(QKeyEvent*)),RovMov,SLOT(KeyGrab(QKeyEvent*)));
     connect(this, SIGNAL(KeyPressure(QKeyEvent*)), RovSU,SLOT(key(QKeyEvent *)));
-    connect(RovSU,SIGNAL(UpdateRoveWidgents(const MoveParm&)),this,SLOT(UpdateRovWidgets(const MoveParm&)));
+    connect(RovSU,SIGNAL(UpdateRoveWidgents(const QVector<double> &)),this,SLOT(UpdateRovWidgets(const QVector<double> &)));
 }
 
 ControlPanel::~ControlPanel()
@@ -59,15 +59,15 @@ void ControlPanel::UpdateSetWidgets(const MoveParm &Move)
     ui->SetRolLabel->setText(QString::number(Move.Roll,'f',0));
     ui->SetDepthLabel->setText(QString::number(Move.Depth,'f',1));
     ui->SetYawlabel->setText(QString::number(Move.Yaw,'f',0));
-    RovSU->SetYaw(Move);
+    RovSU->SetRovParm(Move);
 }
 
-void ControlPanel::UpdateRovWidgets(const MoveParm &Move)
+void ControlPanel::UpdateRovWidgets(const QVector<double> &Move)
 {
-    picROV->setRotation(Move.Roll);
-    txtCurrentYaw->setPlainText(QString::number(Move.Yaw,'f',1));
-    ui->RollBar->setValue(static_cast<int>(Move.Roll));
-    ui->DepthBar->setValue(static_cast<int>(Move.Depth));
-    ui->CurRolLabel->setText(QString::number(Move.Roll,'f',0));
-    ui->CurDepthLabel->setText(QString::number(Move.Depth,'f',1));
+    picROV->setRotation(Move[RovControl::Yaw]);
+    txtCurrentYaw->setPlainText(QString::number(Move[RovControl::Yaw],'f',1));
+    ui->RollBar->setValue(static_cast<int>(Move[RovControl::Roll]));
+    ui->DepthBar->setValue(static_cast<int>(Move[RovControl::Depth]));
+    ui->CurRolLabel->setText(QString::number(Move[RovControl::Roll],'f',0));
+    ui->CurDepthLabel->setText(QString::number(Move[RovControl::Depth],'f',1));
 }
