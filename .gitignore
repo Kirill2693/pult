@@ -27,3 +27,13 @@ build-pult/ui_controlpanel.h
 build-pult/debug/moc_communication.cpp
 build-pult/debug/moc_rovcontrol.cpp
 build-pult/debug/moc_communication.cpp
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/debug/moc_communication.cpp
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/debug/moc_controlpanel.cpp
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/debug/moc_predefs.h
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/debug/moc_rovcontrol.cpp
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/debug/moc_rovorient.cpp
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/debug/pult.exe
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/Makefile
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/Makefile.Debug
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/Makefile.Release
+build-pult-Desktop_Qt_5_12_3_MinGW_32_bit-Debug/ui_controlpanel.h
