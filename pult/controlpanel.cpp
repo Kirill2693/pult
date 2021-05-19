@@ -24,8 +24,8 @@ ControlPanel::ControlPanel(QWidget *parent) :
     ui->YawView->setScene(scene);
     ui->YawView->setStyleSheet("background: transparent");
     ui->YawView->setRenderHint(QPainter::Antialiasing);
-    picDial = scene->addPixmap(QPixmap("C:\\Users\\Lenovo\\Desktop\\development\\QTsem2\\pult\\build-pult\\images\\dial.png"));
-    picROV = scene->addPixmap(QPixmap("C:\\Users\\Lenovo\\Desktop\\development\\QTsem2\\pult\\build-pult\\images\\rov.png"));
+    picDial = scene->addPixmap(QPixmap("./dial.png"));
+    picROV = scene->addPixmap(QPixmap("./rov.png"));
     txtCurrentYaw = scene->addText(QString::number(0), QFont("Times New Roman",14));
     picROV->setTransform(QTransform::fromScale(0.5,0.5));
     picROV->setPos(picDial->pixmap().width()/2-picROV->pixmap().width()/4+4,

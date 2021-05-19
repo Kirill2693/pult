@@ -14,12 +14,10 @@ public:
 signals:
 
 public slots:
-    void send(DRK sendData);
-    void resivData();
-    void ProcessingRawData();
-    MoveParm GetDataFromMatlab()
+    void send(DRK sendData); // передача в модель структуры с сигналами двигателей
+    void resivData();        // прием данных из матлаба
+    MoveParm GetDataFromMatlab() // доступ к принятым данным
     {
-        ProcessingRawData();
         return ResiveData;
     }
 

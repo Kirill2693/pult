@@ -3,12 +3,12 @@
 struct DRK
 {
     DRK() {Uvl = 0; Uvr = 0; Uvr = 0; Uhlf = 0; Uhrf = 0; Uhlb = 0; Uhrb = 0;}
-    int Uvl;
-    int Uvr;
-    int Uhlf;
-    int Uhrf;
-    int Uhlb;
-    int Uhrb;
+    double Uvl;
+    double Uvr;
+    double Uhlf;
+    double Uhrf;
+    double Uhlb;
+    double Uhrb;
 };
 
 struct ContourSignals

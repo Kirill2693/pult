@@ -36,7 +36,7 @@ void Communication::resivData()
     }
 }
 
-void Communication::ProcessingRawData()
+/*void Communication::ProcessingRawData()
 {
     if(ResiveData.Yaw > 360)
     {
@@ -65,3 +65,4 @@ void Communication::ProcessingRawData()
         ResiveData.Roll = -60;
     }
 }
+*/
