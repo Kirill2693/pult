@@ -149,7 +149,7 @@ void RovControl::SetMode(const int Contour, int Value)
 void RovControl::IntegrRovSpeed()
 {
     CurentRovPos[Yaw]+=CurentRovSpeed[Yaw]*(Ts/1000.0);  // интегрируем угловую скорость, переводим мс в с
-    if(CurentRovPos[Yaw]>360)
+    if(CurentRovPos[Yaw]>=360)
     {
         CurentRovPos[Yaw]-=360;
     }

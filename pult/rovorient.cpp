@@ -51,7 +51,7 @@ void RovOrient::SetYawSpeed(int dir)
     }
 
     SetMove.Yaw += SetMove.YawSpeed;
-    if(SetMove.Yaw > 360)
+    if(SetMove.Yaw >= 360)
     {
         SetMove.Yaw = SetMove.Yaw-360;
     }
