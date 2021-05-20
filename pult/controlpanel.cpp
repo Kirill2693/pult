@@ -17,6 +17,14 @@ ControlPanel::ControlPanel(QWidget *parent) :
     ui->SetRollSlider->setValue(0);
     ui->SetDepthSlider->setValue(0);
 
+    SetFlag = false;
+    DirectFlag = true;
+    StabFlag = false;
+
+    ui->YawCheckBox->setEnabled(false);
+    ui->DepthCheckBox->setEnabled(false);
+    ui->RollCheckBox_2->setEnabled(false);
+
     RovMov = new RovOrient(this);
     RovSU = new RovControl(this);
 
@@ -70,4 +78,128 @@ void ControlPanel::UpdateRovWidgets(const QVector<double> &Move)
     ui->DepthBar->setValue(static_cast<int>(Move[RovControl::Depth]));
     ui->CurRolLabel->setText(QString::number(Move[RovControl::Roll],'f',0));
     ui->CurDepthLabel->setText(QString::number(Move[RovControl::Depth],'f',1));
+}
+
+
+
+void ControlPanel::on_ApplyButton_clicked()
+{
+    if(SetFlag == true)
+    {
+    int contour = ui->ContourBox->currentIndex();
+    switch (contour)
+    {
+    case RovControl::Yaw:
+        RovSU->SetK1(RovControl::Yaw,ui->K1SpinBox->value());
+        RovSU->SetK2(RovControl::Yaw,ui->K2SpinBox->value());
+        RovSU->SetKsp(RovControl::Yaw,ui->K3SpinBox->value());
+        RovSU->SetKosPos(RovControl::Yaw,ui->KosPosSpinBox->value());
+        break;
+    case RovControl::Roll:
+        RovSU->SetK1(RovControl::Roll,ui->K1SpinBox->value());
+        RovSU->SetK2(RovControl::Roll,ui->K2SpinBox->value());
+        RovSU->SetKsp(RovControl::Roll,ui->K3SpinBox->value());
+        RovSU->SetKosPos(RovControl::Roll,ui->KosPosSpinBox->value());
+        break;
+     case RovControl::Depth:
+        RovSU->SetK1(RovControl::Depth,ui->K1SpinBox->value());
+        RovSU->SetK2(RovControl::Depth,ui->K2SpinBox->value());
+        RovSU->SetKsp(RovControl::Depth,ui->K3SpinBox->value());
+        RovSU->SetKosPos(RovControl::Depth,ui->KosPosSpinBox->value());
+        break;
+    }
+    }
+}
+
+void ControlPanel::on_SetModeButton_clicked()
+{
+    SetFlag = true;
+    StabFlag = false;
+    DirectFlag = false;
+    ui->WorkModelabel->setText("Настройка");
+    RovSU->SetMode(RovControl::Yaw, RovControl::SettingsMode);
+    RovSU->SetMode(RovControl::Roll, RovControl::SettingsMode);
+    RovSU->SetMode(RovControl::Depth, RovControl::SettingsMode);
+    ui->YawCheckBox->setEnabled(false);
+    ui->DepthCheckBox->setEnabled(false);
+    ui->RollCheckBox_2->setEnabled(false);
+}
+
+
+void ControlPanel::on_DirectModeButton_clicked()
+{
+    SetFlag = false;
+    StabFlag = false;
+    DirectFlag = true;
+    ui->WorkModelabel->setText("Ручной");
+    RovSU->SetMode(RovControl::Yaw, RovControl::DirectMode);
+    RovSU->SetMode(RovControl::Roll, RovControl::DirectMode);
+    RovSU->SetMode(RovControl::Depth, RovControl::DirectMode);
+    ui->YawCheckBox->setEnabled(false);
+    ui->DepthCheckBox->setEnabled(false);
+    ui->RollCheckBox_2->setEnabled(false);
+}
+
+void ControlPanel::on_StabModeButton_clicked()
+{
+    ui->YawCheckBox->setEnabled(true);
+    ui->DepthCheckBox->setEnabled(true);
+    ui->RollCheckBox_2->setEnabled(true);
+    SetFlag = false;
+    StabFlag = true;
+    DirectFlag = false;
+    ui->WorkModelabel->setText("Стабилизация");
+    RovSU->SetMode(RovControl::Yaw, RovControl::DirectMode);
+    RovSU->SetMode(RovControl::Roll, RovControl::DirectMode);
+    RovSU->SetMode(RovControl::Depth, RovControl::DirectMode);
+    if(ui->YawCheckBox->isChecked())
+    {
+        RovSU->SetMode(RovControl::Yaw, RovControl::StabMode);
+    }
+    if(ui->RollCheckBox_2->isChecked())
+    {
+        RovSU->SetMode(RovControl::Roll, RovControl::StabMode);
+    }
+    if(ui->DepthCheckBox->isChecked())
+    {
+        RovSU->SetMode(RovControl::Depth, RovControl::StabMode);
+    }
+}
+
+
+
+void ControlPanel::on_YawCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        RovSU->SetMode(RovControl::Yaw, RovControl::StabMode);
+    }
+    else
+    {
+        RovSU->SetMode(RovControl::Yaw, RovControl::DirectMode);
+    }
+}
+
+void ControlPanel::on_RollCheckBox_2_toggled(bool checked)
+{
+    if(checked)
+    {
+        RovSU->SetMode(RovControl::Roll, RovControl::StabMode);
+    }
+    else
+    {
+        RovSU->SetMode(RovControl::Roll, RovControl::DirectMode);
+    }
+}
+
+void ControlPanel::on_DepthCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        RovSU->SetMode(RovControl::Depth, RovControl::StabMode);
+    }
+    else
+    {
+        RovSU->SetMode(RovControl::Depth, RovControl::DirectMode);
+    }
 }

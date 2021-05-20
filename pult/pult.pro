@@ -40,3 +40,6 @@ HEADERS += \
 
 FORMS += \
         controlpanel.ui
+
+RESOURCES += \
+    Img.qrc

@@ -32,6 +32,22 @@ signals:
 protected:
     void virtual keyPressEvent(QKeyEvent * e);
 
+private slots:
+
+    void on_ApplyButton_clicked();
+
+    void on_SetModeButton_clicked();
+
+    void on_DirectModeButton_clicked();
+
+    void on_StabModeButton_clicked();
+
+    void on_YawCheckBox_toggled(bool checked);
+
+    void on_RollCheckBox_2_toggled(bool checked);
+
+    void on_DepthCheckBox_toggled(bool checked);
+
 private:
     Ui::ControlPanel *ui;
 
@@ -41,6 +57,9 @@ private:
     QGraphicsTextItem *txtCurrentYaw;
     RovOrient *RovMov;
     RovControl *RovSU;
+    bool SetFlag;
+    bool DirectFlag;
+    bool StabFlag;
 };
 
 #endif // CONTROLPANEL_H

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1133</width>
-    <height>746</height>
+    <height>711</height>
    </rect>
   </property>
   <property name="font">
@@ -23,12 +23,15 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTabWidget" name="tabWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>-10</x>
       <y>0</y>
-      <width>1121</width>
-      <height>691</height>
+      <width>1306</width>
+      <height>681</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -46,43 +49,6 @@
         <width>551</width>
         <height>481</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="RollBar">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>70</y>
-        <width>61</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>-60</number>
-      </property>
-      <property name="maximum">
-       <number>60</number>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
-      </property>
-      <property name="textVisible">
-       <bool>true</bool>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="invertedAppearance">
-       <bool>false</bool>
-      </property>
-      <property name="textDirection">
-       <enum>QProgressBar::BottomToTop</enum>
-      </property>
-      <property name="format">
-       <string/>
       </property>
      </widget>
      <widget class="QProgressBar" name="DepthBar">
@@ -110,34 +76,6 @@
        <string/>
       </property>
      </widget>
-     <widget class="QSlider" name="SetRollSlider">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>70</y>
-        <width>22</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>-60</number>
-      </property>
-      <property name="maximum">
-       <number>60</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="invertedAppearance">
-       <bool>false</bool>
-      </property>
-      <property name="tickPosition">
-       <enum>QSlider::TicksBothSides</enum>
-      </property>
-      <property name="tickInterval">
-       <number>20</number>
-      </property>
-     </widget>
      <widget class="QSlider" name="SetDepthSlider">
       <property name="enabled">
        <bool>true</bool>
@@ -152,6 +90,7 @@
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>
@@ -196,8 +135,8 @@
      <widget class="QLabel" name="SetDepthLabel">
       <property name="geometry">
        <rect>
-        <x>940</x>
-        <y>470</y>
+        <x>1010</x>
+        <y>430</y>
         <width>55</width>
         <height>16</height>
        </rect>
@@ -209,21 +148,8 @@
      <widget class="QLabel" name="SetYawlabel">
       <property name="geometry">
        <rect>
-        <x>490</x>
-        <y>580</y>
-        <width>55</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="SetRolLabel">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>450</y>
+        <x>550</x>
+        <y>550</y>
         <width>55</width>
         <height>16</height>
        </rect>
@@ -243,6 +169,7 @@
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <weight>50</weight>
         <bold>false</bold>
         <underline>false</underline>
@@ -289,30 +216,6 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="RollTxtLabel">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>20</y>
-        <width>111</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>15</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Крен</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
@@ -339,42 +242,638 @@
        <string>Заданная глубина</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QCheckBox" name="DepthCheckBox">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>420</y>
-        <width>121</width>
+        <x>990</x>
+        <y>590</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Глубина</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="RollCheckBox_2">
+      <property name="geometry">
+       <rect>
+        <x>990</x>
+        <y>550</y>
+        <width>71</width>
         <height>21</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Заданный крен</string>
+       <string>Крен</string>
       </property>
      </widget>
-     <widget class="QLabel" name="CurRolLabel">
+     <widget class="QCheckBox" name="YawCheckBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>230</y>
-        <width>55</width>
-        <height>16</height>
+        <x>990</x>
+        <y>510</y>
+        <width>70</width>
+        <height>17</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>Курс</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Настройки</string>
-     </attribute>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>470</y>
+        <width>141</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Режим:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="WorkModelabel">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Minimum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>13</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="DirectModeButton">
+         <property name="text">
+          <string>Ручной режим</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="StabModeButton">
+         <property name="text">
+          <string>Стабилизация</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="SetModeButton">
+         <property name="text">
+          <string>Настройка</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>20</y>
+        <width>181</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="RollTxtLabel">
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Крен</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>18</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QSlider" name="SetRollSlider">
+           <property name="minimum">
+            <number>-60</number>
+           </property>
+           <property name="maximum">
+            <number>60</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>false</bool>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::TicksBothSides</enum>
+           </property>
+           <property name="tickInterval">
+            <number>20</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="CurRolLabel">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QProgressBar" name="RollBar">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimum">
+            <number>-60</number>
+           </property>
+           <property name="maximum">
+            <number>60</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+           </property>
+           <property name="textVisible">
+            <bool>true</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>false</bool>
+           </property>
+           <property name="textDirection">
+            <enum>QProgressBar::BottomToTop</enum>
+           </property>
+           <property name="format">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>18</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Заданный крен</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="SetRolLabel">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
       <string>Сиситема управления</string>
      </attribute>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>40</y>
+        <width>883</width>
+        <height>305</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>13</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Контур</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="ContourBox">
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Курс</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Крен</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Глубина</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>K3</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>18</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="2">
+              <widget class="QDoubleSpinBox" name="K2SpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximum">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>18</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="2" column="2">
+              <widget class="QDoubleSpinBox" name="K3SpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximum">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>K2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>K1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Kос</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QDoubleSpinBox" name="KosPosSpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximum">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QDoubleSpinBox" name="K1SpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximum">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>18</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="1">
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Preferred</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>18</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>13</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QPushButton" name="ApplyButton">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Применить</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Загрузить из файла</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Сохранить в файл</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="SuPic">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>13</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="Img.qrc">:/img/SU.png</pixmap>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -384,7 +883,7 @@
      <x>0</x>
      <y>0</y>
      <width>1133</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -399,6 +898,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="Img.qrc"/>
+ </resources>
  <connections/>
 </ui>
