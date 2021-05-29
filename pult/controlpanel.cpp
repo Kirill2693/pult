@@ -78,6 +78,8 @@ void ControlPanel::UpdateRovWidgets(const QVector<double> &Move)
     ui->DepthBar->setValue(static_cast<int>(Move[RovControl::Depth]));
     ui->CurRolLabel->setText(QString::number(Move[RovControl::Roll],'f',0));
     ui->CurDepthLabel->setText(QString::number(Move[RovControl::Depth],'f',1));
+    RovMov->ResetSpeed();
+
 }
 
 

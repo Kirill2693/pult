@@ -60,7 +60,7 @@ private:
 
 
     QTimer *timer;
-    int Ts = 10000; // период замыкания системы управления
+    int Ts = 10; // период замыкания системы управления
     Communication *udp;
     QVector<int> WorkMode; // Режимы работы каждого контура
     DRK DrkSignals;  // структура с сигналами на движки

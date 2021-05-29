@@ -14,7 +14,7 @@ RovControl::RovControl(QObject *parent) : QObject(parent)
     SetRovSpeed = {0,0,0,0};
     SetRovPos = {0,0,0,0};
 
-    WorkMode = {StabMode,DirectMode,DirectMode,DirectMode};
+    WorkMode = {DirectMode,DirectMode,DirectMode,DirectMode};
     timer = new QTimer();
     timer->start(Ts);
     udp = new Communication();
@@ -28,7 +28,6 @@ void RovControl::tick()
     IntegrRovSpeed();  // Интегрируем полученые скорости
     emit UpdateRoveWidgents(CurentRovPos);  //Обновляем значения виджетов
     QVector<double> OutSignals(4,0); // вектор выходных сигналов контуров
-
     OutSignals[Yaw] = CalcContour(Yaw);  // расчет сигнала каждого контура
     OutSignals[Roll] = CalcContour(Roll);
     OutSignals[Depth] = CalcContour(Depth);
@@ -48,7 +47,6 @@ void RovControl::BfsDrk(const QVector<double> &OutContour)
      DrkSignals.Uhrb = Saturation(OutContour[March]+OutContour[Yaw],ThrusterUp,ThrusterDown);   // горизонтальный правый задний
      DrkSignals.Uhlf = Saturation(OutContour[March]-OutContour[Yaw],ThrusterUp,ThrusterDown);   // горизонтальный левый передний
      DrkSignals.Uhlb = Saturation(OutContour[March]-OutContour[Yaw],ThrusterUp,ThrusterDown);   // горизонтальный левый задний
-
 }
 
 void RovControl::ResetSetSpeed()
@@ -72,7 +70,7 @@ double RovControl::CalcContour(const int Contour)
     }
     if(WorkMode[Contour] == DirectMode)  // режим ручного управления
     {
-        out = SetRovSpeed[Contour];   // выходное значение равно скорости
+        out = SetRovSpeed[Contour]*40;   // выходное значение равно скорости
     }
     return out;
 }

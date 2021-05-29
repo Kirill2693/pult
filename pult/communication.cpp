@@ -15,11 +15,11 @@ Communication::Communication(QObject *parent) : QObject(parent)
     connect(m_resiveSocket,SIGNAL(readyRead()),this,SLOT(resivData()));
 
     //Тест
-    ResiveData.Depth = 10;
+  /*  ResiveData.Depth = 10;
     ResiveData.DepthSpeed = 2;
     ResiveData.MarchSpeed = 1;
     ResiveData.RollSpeed = 0.9;
-    ResiveData.YawSpeed = 6;
+    ResiveData.YawSpeed = 6;*/
 }
 
 void Communication::send(DRK sendData)
@@ -39,6 +39,8 @@ void Communication::resivData()
     {
         m_resiveSocket->readDatagram((char*)&ResiveData,sizeof(ResiveData));
         qDebug()<<"Resive YawSpeed"<<ResiveData.YawSpeed;
+        qDebug()<<"Resive RollSpeed"<<ResiveData.RollSpeed;
+        qDebug()<<"Resive DepthSpeed"<<ResiveData.DepthSpeed;
     }
 }
 
